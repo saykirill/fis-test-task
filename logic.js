@@ -20,13 +20,13 @@ function getId(studId, startDate, endDate) {
   for (let i = 0; i < startDate.length; i++) {
     if (!isNaN(endDate[i]) || endDate[i] !== undefined) {
       //если книга до сих пор не сдана, то для подсчёта мы берём текущую дату в else
-      let dateDif = dateDifference(startDate[i], endDate[i])
+      let dateDif = dateDifference(startDate[i], endDate[i]);
       if (dateDif > maxTerm) {
         sum[studId[i]] += +dateDif;
       }
     } else {
       endDate [i] = new Date();
-      dateDif = dateDifference(startDate[i], endDate[i].toISOString())
+      dateDif = dateDifference(startDate[i], endDate[i].toISOString());
       sum[studId[i]] += +dateDif;
     }
   }
@@ -35,10 +35,10 @@ function getId(studId, startDate, endDate) {
 }
 
 function dateDifference(str1, str2) {
-  const dayInMs = 86400000; //1000*60*60*24
+  const msInDays = 1/(1000*60*60*24);
   let date1 = new Date(str1.substr(0, 4), str1.substr(5, 2), str1.substr(8, 2));
   let date2 = new Date(str2.substr(0, 4), str2.substr(5, 2), str2.substr(8, 2));
-  return (date2-date1)/dayInMs; //в днях
+  return (date2-date1)*msInDays; //в днях
 }
 
 function getMaxSumId(arr) {
