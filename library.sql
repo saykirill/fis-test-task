@@ -71,3 +71,18 @@ LIMIT 1;
 
 /*----------------------------------------------------------------------------------------------------------------*/
 
+SELECT studName, SUM(days) AS sumDays
+FROM 
+(
+	SELECT studName, registry.id, startDate, endDate, CURRENT_DATE, DATEDIFF(endDate, startDate) AS days
+	FROM registry
+	INNER JOIN student
+	ON registry.studId = student.id
+	WHERE DATEDIFF(endDate, startDate) > 14 OR (endDate IS NULL)
+	GROUP BY id
+) AS tmp1
+GROUP BY studName
+ORDER BY sumDays DESC
+LIMIT 1;
+
+/*----------------------------------------------------------------------------------------------------------------*/

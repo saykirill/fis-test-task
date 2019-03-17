@@ -56,3 +56,23 @@ LIMIT 1;
 ```
 
 **3.	Определите понятие «злостный читатель».  Предложите алгоритм для поиска самого злостного читателя библиотеки. На любом языке программирования опишите алгоритм поиска такого читателя. Алгоритм должен основываться на модели данных, которую вы описали в задании 1.**
+* Назовём «Злостным читателем» человека, который задерживает сдачу книг на большой промежуток времени. Определим, что срок возврата книги в библиотеку не более двух недель. Самым «Злостным» же станет тот, кто задержал книг в сумме на самое большое количество дней.
+* Найти такого человека можно SQL-запросом:
+```
+SELECT studName, SUM(days) AS sumDays
+FROM 
+(
+	SELECT studName, registry.id, startDate, endDate, CURRENT_DATE, DATEDIFF(endDate, startDate) AS days
+	FROM registry
+	INNER JOIN student
+	ON registry.studId = student.id
+	WHERE DATEDIFF(endDate, startDate) > 14 OR (endDate IS NULL)
+	GROUP BY id
+) AS tmp1
+GROUP BY studName
+ORDER BY sumDays DESC
+LIMIT 1;
+```
+
+* А так же алгоритмом написанным на JavaScript:
+
