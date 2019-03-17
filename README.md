@@ -28,7 +28,7 @@ _@ Воронин Кирилл_
 |	        |bookName	|Char(45)	|           |Название
 |	        |author	    |Char(45)   |           |Автор
 |	        |publisher	|Char(45)   |           |Издатель
-|        	|bookYear	|Date	    |           |Год
+|        	|bookYear	|Integer(4) |           |Год
 |        	|quantity	|Integer(4)	|           |Количество 
 |student	|id	        |Integer(10)|PRIMARY_KEY|Учёт студентов           
 |	        |studName   |Char(45)   |           |ФИО	
