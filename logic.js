@@ -12,6 +12,7 @@
 */
 
 function getId(studId, startDate, endDate) {
+  const maxTerm = 14; //дней
   let sum = [];
   for (let i = 0; i < startDate.length; i++) {
     sum[studId[i]] = 0;
@@ -20,7 +21,7 @@ function getId(studId, startDate, endDate) {
     if (!isNaN(endDate[i]) || endDate[i] !== undefined) {
       //если книга до сих пор не сдана, то для подсчёта мы берём текущую дату в else
       let dateDif = dateDifference(startDate[i], endDate[i])
-      if (dateDif > 14) {
+      if (dateDif > maxTerm) {
         sum[studId[i]] += +dateDif;
       }
     } else {
@@ -34,9 +35,10 @@ function getId(studId, startDate, endDate) {
 }
 
 function dateDifference(str1, str2) {
+  const dayInMs = 86400000; //1000*60*60*24
   let date1 = new Date(str1.substr(0, 4), str1.substr(5, 2), str1.substr(8, 2));
   let date2 = new Date(str2.substr(0, 4), str2.substr(5, 2), str2.substr(8, 2));
-  return (date2-date1)/(1000*60*60*24); //в днях
+  return (date2-date1)/dayInMs; //в днях
 }
 
 function getMaxSumId(arr) {
