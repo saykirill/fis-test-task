@@ -74,5 +74,5 @@ ORDER BY sumDays DESC
 LIMIT 1;
 ```
 
-* А так же алгоритмом написанным на JavaScript:
+* А так же алгоритмом написанным на JavaScript в файле _logic.js_.
 
