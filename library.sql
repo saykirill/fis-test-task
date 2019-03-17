@@ -55,3 +55,19 @@ INSERT INTO registry (bookId, studId, startDate, endDate) VALUE ('1', '4', '2018
 INSERT INTO registry (bookId, studId, startDate, endDate) VALUE ('7', '2', '2018-08-09', '2018-08-16');
 INSERT INTO registry (bookId, studId, startDate, endDate) VALUE ('9', '2', '2018-08-26', '2018-12-31');
 /*----------------------------------------------------------------------------------------------------------------*/
+
+SELECT author
+FROM
+(
+	SELECT author, startDate, COUNT(author) AS cnt
+	FROM registry
+	INNER JOIN book 
+	ON book.id = registry.bookid
+	WHERE YEAR(startDate)='2018'
+	GROUP BY author
+	ORDER BY cnt DESC
+) AS tmp
+LIMIT 1;
+
+/*----------------------------------------------------------------------------------------------------------------*/
+
